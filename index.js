@@ -22,7 +22,8 @@ const storage = multer.diskStorage({
         res.json({succes : 0 , mesage:err})
     }
  }
-
+ 
+//path /profile yang merender folder statis supaya gambar bisa di akses melalui url 
  app.use('/profile',express.static('./upload/images'));
 
  app.post('/',upload.single('photo'),(req,res) => {
