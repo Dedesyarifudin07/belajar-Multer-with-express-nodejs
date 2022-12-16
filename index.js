@@ -13,7 +13,7 @@ const storage = multer.diskStorage({
 
  const upload = multer({
     storage:storage,
-    limits:{fileSize:1000}
+    limits:{fileSize:100000}
  })
 
  //buat fungsi untuk menghandle eror
@@ -22,14 +22,16 @@ const storage = multer.diskStorage({
         res.json({succes : 0 , mesage:err})
     }
  }
- 
+
  app.use('/profile',express.static('./upload/images'));
+
  app.post('/',upload.single('photo'),(req,res) => {
      console.log(req.file);
      res.json({succes:1,
         url:`http://localhost:5000/profile/${req.file.filename}`
     })
 })
+
 app.use(errHandler);
 
  app.listen(5000, () => {
